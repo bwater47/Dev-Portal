@@ -1,0 +1,12 @@
+<section>
+    <h1>Homepage</h1>
+    <section>
+        {{#each postArray as |post|}}
+            <article>
+                <h2>{{post.title}}</h2>
+                <p>{{post.post_content}}</p>
+            </article>
+
+        {{/each}}
+    </section>
+</section>
