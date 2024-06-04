@@ -26,6 +26,10 @@ You'll need to install GitBash, VS Code, Node.js, NPM bcrypt, NPM connect-sessio
 
 The Dev Portal is important for Web Developers. They spend their time reading and writing about technical concepts. This blog site is a place for developers to write their own blogs on technical concepts, recent advancements, and new technologies.
 
+- <strong>Dev Portal Link</strong>
+
+- [Website-Link](N/A)
+
 - <strong>Dev Portal Screenshots</strong>
 
 - [Screenshot](N/A)

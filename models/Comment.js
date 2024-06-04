@@ -1,11 +1,12 @@
+// This model will be used to create the Comment table in the database.
 const {
     Model,
     DataTypes
 }
 = require('sequelize');
-
+// Import the connection to the database
 const sequelize = require('../config/connection');
-
+// This is the Comment model that extends the Sequelize Model
 class Comment extends Model {}
 Comment.init(
     {
