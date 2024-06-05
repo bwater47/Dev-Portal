@@ -1,14 +1,14 @@
 <section>
-    <h1>Homepage</h1>
-    <section>
-        <!-- Display all posts for each post in the postArray -->
-        {{#each postArray as |post|}}
-            <article>
-                <!-- Display the title and post content for each post with the post object -->
-                <h2>{{post.title}}</h2>
-                <p>{{post.post_content}}</p>
-            </article>
+  <h1>Homepage</h1>
+  <section>
+    <!-- Display all posts for each post in the postArray -->
+    {{#each postArray as |post|}}
+      <article>
+        <!-- Display the title and post content for each post with the post object -->
+        <h2>{{post.title}}</h2>
+        <p>{{post.post_content}}</p>
+      </article>
 
-        {{/each}}
-    </section>
+    {{/each}}
+  </section>
 </section>

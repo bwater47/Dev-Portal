@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 // User model (table) by extending off Sequelize's Model class
 class Users extends Model {
-    // set up method to run on instance data (per user) to check password
+  // set up method to run on instance data (per user) to check password
   checkPassword(loginPw) {
     return bcrypt.compareSync(loginPw, this.password);
   }
@@ -46,7 +46,7 @@ Users.init(
         return newUserData;
       },
     },
-    
+
     sequelize,
     freezetablename: true,
     underscored: true,

@@ -1,35 +1,31 @@
 // This model will be used to create the Comment table in the database.
-const {
-    Model,
-    DataTypes
-}
-= require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 // Import the connection to the database
 const sequelize = require('../config/connection');
 // This is the Comment model that extends the Sequelize Model
 class Comment extends Model {}
 Comment.init(
-    {
-        id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            primaryKey: true,
-            autoIncrement: true
-        },
-        comment_text: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                len: [1]
-            }
-        },
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
     },
-    {
-        sequelize,
-        freezeTableName: true,
-        underscored: true,
-        modelName: 'comment'
-    }
-)
+    comment_text: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1],
+      },
+    },
+  },
+  {
+    sequelize,
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'comment',
+  }
+);
 
 module.exports = Comment;
