@@ -38,14 +38,15 @@ Users.init(
       },
     },
     // hooks are automatic methods that run during various phases of the Users Model lifecycle so this hook will automatically hash the password before it is created in the database
+  },
+  {
     hooks: {
       beforeCreate: async (newUserData) => {
         newUserData.password = await bcrypt.hash(newUserData.password, 10);
         return newUserData;
       },
     },
-  },
-  {
+    
     sequelize,
     freezetablename: true,
     underscored: true,
