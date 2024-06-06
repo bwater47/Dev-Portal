@@ -9,7 +9,7 @@ class Users extends Model {
     return bcrypt.compareSync(loginPw, this.password);
   }
 }
-
+// create fields/columns for User model
 Users.init(
   {
     id: {
