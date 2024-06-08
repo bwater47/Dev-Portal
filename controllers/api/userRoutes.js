@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Users } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 router.get('/', async (req, res) => {
   try {
@@ -23,39 +24,6 @@ router.post('/', async (req, res) => {
       req.session.logged_in = true;
       // Line 14-15: The user data is sent back as a JSON response
       res.status(200).json(userData);
-    });
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
-
-// login route to verify user credentials and log the user in
-router.post('/login', async (req, res) => {
-  try {
-    // Line 25: The user data is found using the findOne method
-    const userData = await Users.findOne({ where: { email: req.body.email} });
-    // Line 27-31: If the user data is not found or the password is incorrect, a 400 status is returned with a message
-    if (!userData) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
-      return;
-    }
-    // Line 34: The checkPassword method is called on the user data to verify the password
-    const validPassword = await userData.checkPassword(req.body.password);
-    // Line 36-40: If the password is incorrect, a 400 status is returned with a message
-    if (!validPassword) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
-      return;
-    }
-    // Line 43-47: The user_id and logged_in properties are set on the session object and the user data is serialized and sent back as a JSON response
-    req.session.save(() => {
-      req.session.user_id = userData.id;
-      req.session.logged_in = true;
-
-      res.json({ user: userData, message: 'You are now logged in!' });
     });
   } catch (err) {
     res.status(400).json(err);

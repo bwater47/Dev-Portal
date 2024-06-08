@@ -1,6 +1,7 @@
 // Line 2-3: Import the necessary modules
 const router = require('express').Router();
 const { Post, Users } = require('../models');
+const withAuth = require('../utils/auth');
 // Line 5: Create a new router object
 router.get('/', async (req, res) => {
   // Line 7: Try catch block to catch errors
@@ -13,7 +14,18 @@ router.get('/', async (req, res) => {
     const postArray = allPosts.map((post) => post.get({ plain: true }));
     console.log(postArray);
     // Line 15: Render the homepage template and pass the serialized posts into the template
-    res.render('homepage', { postArray, loggedIn: req.session.logged_in});
+    res.render('homepage', { postArray, loggedIn: req.session.logged_in });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+});
+
+router.get('/signup', async (req, res) => {
+  // Line 7: Try catch block to catch errors
+  try {
+    // Render the homepage template and pass the serialized posts into the template
+    res.render('signup');
   } catch (err) {
     console.error(err);
     res.status(500).json(err);
@@ -33,43 +45,124 @@ router.get('/login', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   try {
-    // Add code here to handle the login request
-    const { email, password } = req.body;
-    // Check if the email and password are provided
-    if (!email || !password) {
-      return res.status(400).json({ message: 'Email and password are required' });
+    const userData = await Users.findOne({ where: { email: req.body.email } });
+    if (!userData) {
+      res
+        .status(400)
+        .json({ message: 'Incorrect email or password, please try again' });
+      return;
     }
-    // Find the user with the provided email
-    const user = await Users.findOne({ where: { email } });
-    // Check if the user exists
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+    const validPassword = await userData.checkPassword(req.body.password);
+    if (!validPassword) {
+      res
+        .status(400)
+        .json({ message: 'Incorrect email or password, please try again' });
+      return;
     }
-    // Check if the password is correct
-    const passwordMatch = await user.checkPassword(password);
-    if (!passwordMatch) {
-      return res.status(401).json({ message: 'Incorrect password' });
-    }
-    // Set the user's session
     req.session.save(() => {
-      req.session.user_id = user.id;
+      req.session.user_id = userData.id;
       req.session.logged_in = true;
-      res.status(200).json({ message: 'Login successful' });
+      res.redirect('/dashboard');
     });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+router.get('/newpost', withAuth, async (req, res) => {
+  try {
+    res.render('newpost', { loggedIn: req.session.logged_in });
   } catch (err) {
     console.error(err);
     res.status(500).json(err);
   }
 });
 
-router.get('/signup', async (req, res) => {
-  // Line 7: Try catch block to catch errors
+router.get('/editpost/:id', withAuth, async (req, res) => {
   try {
-    // Render the homepage template and pass the serialized posts into the template
-    res.render('signup');
+    const postData = await Post.findByPk(req.params.id);
+
+    if (postData) {
+      const post = postData.get({ plain: true });
+
+      res.render('editpost', { post, loggedIn: req.session.logged_in });
+    } else {
+      res.status(404).end();
+    }
   } catch (err) {
-    console.error(err);
-    res.status(500).json(err);
+    res.redirect('login');
+  }
+});
+
+router.get('/viewpost/:id', withAuth, async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id);
+
+    if (postData) {
+      const post = postData.get({ plain: true });
+
+      res.render('viewpost', { post, loggedIn: req.session.logged_in });
+    } else {
+      res.status(404).end();
+    }
+  } catch (err) {
+    res.redirect('login');
+  }
+});
+
+router.get('/deletepost/:id', withAuth, async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id);
+
+    if (postData) {
+      const post = postData.get({ plain: true });
+
+      res.render('deletepost', { post, loggedIn: req.session.logged_in });
+    } else {
+      res.status(404).end();
+    }
+  } catch (err) {
+    res.redirect('login');
+  }
+});
+
+router.get('/profile', withAuth, async (req, res) => {
+  try {
+    const userData = await Users.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+    });
+    const user = userData.get({ plain: true });
+    res.render('profile', { user, loggedIn: req.session.logged_in });
+  } catch (err) {
+    res.redirect('login');
+  }
+});
+
+router.get('/editprofile', withAuth, async (req, res) => {
+  try {
+    const userData = await Users.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+    });
+
+    const user = userData.get({ plain: true });
+
+    res.render('editprofile', { user, loggedIn: req.session.logged_in });
+  } catch (err) {
+    res.redirect('login');
+  }
+});
+
+router.get('/deleteprofile', withAuth, async (req, res) => {
+  try {
+    const userData = await Users.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+    });
+
+    const user = userData.get({ plain: true });
+
+    res.render('deleteprofile', { user, loggedIn: req.session.logged_in });
+  } catch (err) {
+    res.redirect('login');
   }
 });
 

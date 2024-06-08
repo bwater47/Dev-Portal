@@ -1,4 +1,3 @@
-<!-- This is the main layout file that will be used for all pages -->
 <html lang='en'>
   <head>
     <meta charset='UTF-8' />
@@ -26,5 +25,7 @@
       <p>&copy; 2024 Dev Portal</p>
     </footer>
   </body>
-  <script src='/js/logout.js'></script>
+  {{#if loggedIn}}
+    <script src='/js/logout.js'></script>
+  {{/if}}
 </html>
