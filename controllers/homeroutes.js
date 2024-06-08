@@ -31,6 +31,37 @@ router.get('/login', async (req, res) => {
   }
 });
 
+router.post('/login', async (req, res) => {
+  try {
+    // Add code here to handle the login request
+    const { email, password } = req.body;
+    // Check if the email and password are provided
+    if (!email || !password) {
+      return res.status(400).json({ message: 'Email and password are required' });
+    }
+    // Find the user with the provided email
+    const user = await Users.findOne({ where: { email } });
+    // Check if the user exists
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    // Check if the password is correct
+    const passwordMatch = await user.checkPassword(password);
+    if (!passwordMatch) {
+      return res.status(401).json({ message: 'Incorrect password' });
+    }
+    // Set the user's session
+    req.session.save(() => {
+      req.session.user_id = user.id;
+      req.session.logged_in = true;
+      res.status(200).json({ message: 'Login successful' });
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+});
+
 router.get('/signup', async (req, res) => {
   // Line 7: Try catch block to catch errors
   try {
