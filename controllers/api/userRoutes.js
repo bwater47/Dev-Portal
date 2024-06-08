@@ -1,6 +1,17 @@
 const router = require('express').Router();
 const { Users } = require('../../models');
 
+router.get('/', async (req, res) => {
+  try {
+    const userData = await Users.findAll({
+      attributes: { exclude: ['password'] },
+    });
+    res.json(userData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 // route to create a new user and create a session for the user using the session middleware
 router.post('/', async (req, res) => {
   try {
@@ -22,7 +33,7 @@ router.post('/', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     // Line 25: The user data is found using the findOne method
-    const userData = await Users.findOne({ where: { email: req.body.email } });
+    const userData = await Users.findOne({ where: { email: req.body.email} });
     // Line 27-31: If the user data is not found or the password is incorrect, a 400 status is returned with a message
     if (!userData) {
       res

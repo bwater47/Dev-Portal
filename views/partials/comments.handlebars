@@ -1,13 +1,13 @@
 <!-- This is the comments partial -->
 <section>
-    <h1>Comments</h1>
-    <section>
-        <!-- Display all comments for each comment in the commentArray -->
-        {{#each commentArray as |comment|}}
-        <article>
-            <h2>{{comment.title}}</h2>
-            <p>{{comment.comment_content}}</p>
-        </article>
-        {{/each}}
-    </section>
+  <h1>Comments</h1>
+  <!-- Display all comments for each comment in the commentArray -->
+  {{#each commentArray as |comment|}}
+    <article>
+      <h2>{{comment.title}}</h2>
+      <p>{{comment.comment_content}}</p>
+    </article>
+  {{/each}}
 </section>
+
+<script src='/js/comments.js'></script>

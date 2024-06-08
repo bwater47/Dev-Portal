@@ -22,4 +22,4 @@ const editPost = async (event) => {
   }
 };
 // Line 26-27: The event listener is added to the form to listen for a submit event and call the editPost function
-document.querySelector('.edit-post-form').addEventListener('submit', editPost);
+document.querySelector('#edit-post-form').addEventListener('submit', editPost);

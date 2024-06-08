@@ -1,5 +1,4 @@
 <!-- This is the main layout file that will be used for all pages -->
-
 <html lang='en'>
   <head>
     <meta charset='UTF-8' />
@@ -12,12 +11,15 @@
       <ul>
         <li><a href='/'>Home</a></li>
         <li><a href='/dashboard'>Dashboard</a></li>
-        <li><a href='/login'>Login</a></li>
+        {{#if loggedIn}}
+          <li><a href='/logout' id='logout'>Logout</a></li>
+        {{else}}
+          <li><a href='/login' id='login-form'>Login</a></li>
+        {{/if}}
       </ul>
     </header>
 
     <main>
-      <!-- {{{body}}} is where the content for each page will be displayed -->
       {{{body}}}
     </main>
     <footer>

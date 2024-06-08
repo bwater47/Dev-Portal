@@ -1,5 +1,6 @@
 // Login page logout button event listener
-const logout = async () => {
+const logout = async (event) => {
+  event.preventDefault();
   // Fetch request to logout the user using the POST method
   const response = await fetch('/api/users/logout', {
     method: 'POST',

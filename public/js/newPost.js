@@ -21,4 +21,4 @@ const newPost = async (event) => {
   }
 };
 // Line 25-26: The event listener is added to the form to listen for a submit event and call the newPost function
-document.querySelector('.new-post-form').addEventListener('submit', newPost);
+document.querySelector('#new-post-form').addEventListener('submit', newPost);

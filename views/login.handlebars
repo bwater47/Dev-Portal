@@ -1,5 +1,5 @@
 <!-- This is the login page. It contains a form that allows users to log in, and displays a welcome message if the user is already logged in. -->
-{{#if username}}
+{{#if loggedIn}}
   <div>
     <h1>Welcome, {{username}}!</h1>
     <!-- This is the logout route -->
@@ -7,11 +7,19 @@
   </div>
 {{else}}
   <div>
-    <h1>Login</h1>
-    <form action='/login' method='post'>
-      <input type='text' name='username' placeholder='Username' />
-      <input type='password' name='password' placeholder='Password' />
-      <button type='submit'>Login</button>
+    <h1>Sign In</h1>
+    <form action='/login' method='post' id='login-form'>
+      <input id='email-login' type='text' name='email' placeholder='Email' />
+      <input
+        id='password-login'
+        type='password'
+        name='password'
+        placeholder='Password'
+      />
+      <input type="submit" value="Login">
     </form>
   </div>
+  <a href='/signup'>Sign Up</a>
 {{/if}}
+
+<script src='/js/login.js'></script>

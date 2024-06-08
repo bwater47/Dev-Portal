@@ -3,15 +3,9 @@ const { Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
 // route to create a new comment
-router.post('/', withAuth, async (req, res) => {
-  // Line 9-11: a new comment is created and the user_id is set to the session's user_id
+router.get('/', withAuth, async (req, res) => {
   try {
-    const newComment = await Comment.create({
-      ...req.body,
-      user_id: req.session.user_id,
-    });
-    // Line 14: The new comment is serialized and sent back as a JSON response
-    res.status(200).json(newComment);
+    res.render('dashboard', { loggedIn: req.session.logged_in });
   } catch (err) {
     res.status(400).json(err);
   }

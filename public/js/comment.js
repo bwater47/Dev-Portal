@@ -25,25 +25,26 @@ const newCommentHandler = async (event) => {
 };
 // Add an event listener to the form to listen for a submit event and call the newCommentHandler function
 document
-  .querySelector('.new-comment-form')
+  .querySelector('#new-comment-form')
   .addEventListener('submit', newCommentHandler);
 // This function is used to delete a comment
 const deleteCommentHandler = async (event) => {
   if (event.target.hasAttribute('data-id')) {
     const id = event.target.getAttribute('data-id');
-// Send a DELETE request to the comment route with the id of the comment to be deleted
+    // Send a DELETE request to the comment route with the id of the comment to be deleted
     const response = await fetch(`/api/comments/${id}`, {
       method: 'DELETE',
     });
 
     if (response.ok) {
-      document.location.reload();
+      // Remove the deleted comment from the DOM
+      event.target.parentElement.remove();
     } else {
       alert('Failed to delete comment');
     }
   }
 };
-// Add an event listener to the comment list to listen for a click event and call the deleteCommentHandler function
-document
-  .querySelector('.comment-list')
-  .addEventListener('click', deleteCommentHandler);
+// Add an event listener to each comment's delete button to listen for a click event and call the deleteCommentHandler function
+document.querySelectorAll('#delete-comment-btn').forEach((button) => {
+  button.addEventListener('click', deleteCommentHandler);
+});

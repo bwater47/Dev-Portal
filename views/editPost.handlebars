@@ -2,12 +2,12 @@
 <!-- The form also includes a button to submit the changes, a link to delete the post, and a link to cancel the edit. -->
 <section>
   <h1>Edit Post</h1>
-  <form id='editPostForm'>
+  <form id='edit-post-form'>
     <label for='title'>Title</label>
-    <input type='text' id='title' name='title' value='{{post.title}}' />
+    <input type='text' name='title' id='post-title' />
     <label for='post_content'>Post Content</label>
     <textarea
-      id='post_content'
+      id='post-content'
       name='post_content'
     >{{post.post_content}}</textarea>
     <input type='hidden' name='post_id' value='{{post.id}}' />
@@ -16,3 +16,5 @@
   <a href='/deletePost/{{post.id}}'>Delete Post</a>
   <a href='/'>Cancel</a>
 </section>
+
+<script src='/js/editPost.js'></script>

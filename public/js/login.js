@@ -22,5 +22,5 @@ const loginFormHandler = async (event) => {
 };
 // Add an event listener to the login form
 document
-  .querySelector('.login-form')
+  .querySelector('#login-form')
   .addEventListener('submit', loginFormHandler);

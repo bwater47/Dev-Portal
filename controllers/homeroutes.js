@@ -13,7 +13,40 @@ router.get('/', async (req, res) => {
     const postArray = allPosts.map((post) => post.get({ plain: true }));
     console.log(postArray);
     // Line 15: Render the homepage template and pass the serialized posts into the template
-    res.render('homepage', { postArray });
+    res.render('homepage', { postArray, loggedIn: req.session.logged_in});
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+});
+
+router.get('/login', async (req, res) => {
+  // Line 7: Try catch block to catch errors
+  try {
+    // Render the homepage template and pass the serialized posts into the template
+    res.render('login');
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+});
+
+router.get('/signup', async (req, res) => {
+  // Line 7: Try catch block to catch errors
+  try {
+    // Render the homepage template and pass the serialized posts into the template
+    res.render('signup');
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+});
+
+router.get('/logout', async (req, res) => {
+  // Line 7: Try catch block to catch errors
+  try {
+    // Render the logout template
+    res.render('logout');
   } catch (err) {
     console.error(err);
     res.status(500).json(err);
