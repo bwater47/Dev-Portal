@@ -25,6 +25,38 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
+router.get('/editpost/:id', withAuth, async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id);
+
+    if (postData) {
+      const post = postData.get({ plain: true });
+
+      res.render('editpost', { post, loggedIn: req.session.logged_in });
+    } else {
+      res.status(404).end();
+    }
+  } catch (err) {
+    res.redirect('login');
+  }
+});
+
+router.get('/viewpost/:id', withAuth, async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id);
+
+    if (postData) {
+      const post = postData.get({ plain: true });
+
+      res.render('viewpost', { post, loggedIn: req.session.logged_in });
+    } else {
+      res.status(404).end();
+    }
+  } catch (err) {
+    res.redirect('login');
+  }
+});
+
 // route to delete a comment
 router.delete('/:id', withAuth, async (req, res) => {
   try {
