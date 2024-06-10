@@ -1,17 +1,20 @@
 [
     {
+        "id": 1,
         "title": "The Shawshank Redemption",
         "post_content": "Two imprisoned dudes",
         "post_username": "admin",
         "date": "2019-01-01T00:00:00Z"
     },
     {
+        "id": 2,
         "title": "The Godfather",
         "post_content": "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
         "post_username": "admin",
         "date": "2019-01-02T00:00:00Z"
     },
     {
+        "id": 3,
         "title": "The Dark Knight",
         "post_content": "When the menace known as the Joker emerges from his mysterious past, he wreaks havoc and chaos on the people of Gotham.",
         "post_username": "admin",

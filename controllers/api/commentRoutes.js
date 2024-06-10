@@ -33,7 +33,7 @@ router.get('/viewComment/:id', withAuth, async (req, res) => {
     if (commentData) {
       const comment = commentData.get({ plain: true });
 
-      res.render('viewComment' , { comment, loggedIn: req.session.logged_in });
+      res.render('viewComment', { comment, loggedIn: req.session.logged_in });
     } else {
       res.status(404).end();
     }
