@@ -7,16 +7,20 @@ const loginFormHandler = async (event) => {
   const password = document.querySelector('#password-login').value.trim();
   // If the email and password fields aren't empty, send the user data to the login route
   if (email && password) {
-    const response = await fetch('/api/users/login', {
-      method: 'POST',
-      body: JSON.stringify({ email, password }),
-      headers: { 'Content-Type': 'application/json' },
-    });
-    // If the response is okay, redirect the user to the homepage
-    if (response.ok) {
-      document.location.replace('/');
-    } else {
-      alert('Failed to log in');
+    try {
+      const response = await fetch('/api/users/login', {
+        method: 'POST',
+        body: JSON.stringify({ email, password }),
+        headers: { 'Content-Type': 'application/json' },
+      });
+      // If the response is okay, redirect the user to the homepage
+      if (response.ok) {
+        document.location.replace('/');
+      } else {
+        throw new Error('Failed to log in');
+      }
+    } catch (err) {
+      alert(err.message);
     }
   }
 };

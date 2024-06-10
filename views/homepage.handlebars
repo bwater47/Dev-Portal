@@ -5,8 +5,14 @@
     <div>
       <h2>{{title}}</h2>
       <p>{{post_content}}</p>
+      <p>Posted by: {{post_username}}</p>
+      <p>Posted on: {{date}}</p>
       <!-- This is the add comment route -->
-      <a href='/addComment/{{id}}'>Add Comment</a>
+      {{#if loggedIn}}
+        <a href='/addComment/{{id}}'>Add Comment</a>
+      {{/if}}
+      <!-- This is the view comments route -->
+      <a href='/viewComments/{{id}}'>View Comments</a>
     </div>
   {{/each}}
 </section>

@@ -2,6 +2,22 @@ const router = require('express').Router();
 const { Post } = require('../../models');
 const withAuth = require('../../utils/auth');
 
+router.get('/viewPost/:id', async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id);
+
+    if (postData) {
+      const post = postData.get({ plain: true });
+
+      res.render('viewPost', { post, loggedIn: req.session.logged_in });
+    } else {
+      res.status(404).end();
+    }
+  } catch (err) {
+    res.redirect('login');
+  }
+});
+
 // route to create a new post
 router.post('/', withAuth, async (req, res) => {
   try {
@@ -14,6 +30,23 @@ router.post('/', withAuth, async (req, res) => {
     res.status(200).json(newPost);
   } catch (err) {
     res.status(400).json(err);
+  }
+});
+
+// route to edit a comment
+router.get('/editPost/:id', withAuth, async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id);
+
+    if (postData) {
+      const post = postData.get({ plain: true });
+
+      res.render('editPost', { post, loggedIn: req.session.logged_in });
+    } else {
+      res.status(404).end();
+    }
+  } catch (err) {
+    res.redirect('login');
   }
 });
 

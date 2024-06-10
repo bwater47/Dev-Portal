@@ -25,14 +25,15 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
-router.get('/editpost/:id', withAuth, async (req, res) => {
+// route to view a comment
+router.get('/viewComment/:id', withAuth, async (req, res) => {
   try {
-    const postData = await Post.findByPk(req.params.id);
+    const commentData = await Comment.findByPk(req.params.id);
 
-    if (postData) {
-      const post = postData.get({ plain: true });
+    if (commentData) {
+      const comment = commentData.get({ plain: true });
 
-      res.render('editpost', { post, loggedIn: req.session.logged_in });
+      res.render('viewComment' , { comment, loggedIn: req.session.logged_in });
     } else {
       res.status(404).end();
     }
@@ -41,19 +42,12 @@ router.get('/editpost/:id', withAuth, async (req, res) => {
   }
 });
 
-router.get('/viewpost/:id', withAuth, async (req, res) => {
+// route to add a new comment
+router.get('/addComment', withAuth, async (req, res) => {
   try {
-    const postData = await Post.findByPk(req.params.id);
-
-    if (postData) {
-      const post = postData.get({ plain: true });
-
-      res.render('viewpost', { post, loggedIn: req.session.logged_in });
-    } else {
-      res.status(404).end();
-    }
+    res.render('addComment', { loggedIn: req.session.logged_in });
   } catch (err) {
-    res.redirect('login');
+    res.status(400).json(err);
   }
 });
 

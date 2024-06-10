@@ -37,6 +37,13 @@ Users.init(
         len: [8],
       },
     },
+    user_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'users',
+        key: 'id',
+      },
+    },
     // hooks are automatic methods that run during various phases of the Users Model lifecycle so this hook will automatically hash the password before it is created in the database
   },
   {

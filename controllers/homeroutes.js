@@ -47,20 +47,16 @@ router.post('/login', async (req, res) => {
   try {
     // Find the user by the email entered in the login form
     const userData = await Users.findOne({ where: { email: req.body.email } });
-    // If the email is incorrect, send a message back to the client
+    // If the email is incorrect, redirect the user to the login page
     if (!userData) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
+      res.render('login');
       return;
     }
     // Check the password entered in the login form against the hashed password stored in the database
     const validPassword = await userData.checkPassword(req.body.password);
-    // If the password is incorrect, send a message back to the client
+    // If the password is incorrect, redirect the user to the login page
     if (!validPassword) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
+      res.render('login');
       return;
     }
     // Save the user_id and logged_in status to the session
