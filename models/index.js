@@ -7,18 +7,22 @@ const Comment = require('./Comment');
 Post.belongsTo(Users, {
   foreignKey: 'Users_id',
   onDelete: 'CASCADE',
-  hooks: true,
 });
 // Users have many Posts
 Post.hasMany(Comment, {
-  foreignKey: 'post_id',
+  foreignKey: 'Post_id',
   onDelete: 'CASCADE',
 });
 // Users have many Comments
 Comment.belongsTo(Users, {
   foreignKey: 'Users_id',
   onDelete: 'CASCADE',
-  hooks: true,
+});
+// Comments belong to Users
+Comment.belongsTo(Post, {
+  foreignKey: 'Post_id',
+  onDelete: 'CASCADE',
 });
 
+// Export the models
 module.exports = { Users, Post, Comment };
