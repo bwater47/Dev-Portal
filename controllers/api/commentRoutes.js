@@ -26,14 +26,14 @@ router.post('/', withAuth, async (req, res) => {
 });
 
 // route to view a comment
-router.get('/viewComment/:id', withAuth, async (req, res) => {
+router.get('/Comment/:id', withAuth, async (req, res) => {
   try {
     const commentData = await Comment.findByPk(req.params.id);
 
     if (commentData) {
       const comment = commentData.get({ plain: true });
 
-      res.render('viewComment', { comment, loggedIn: req.session.logged_in });
+      res.render('Comment', { comment, loggedIn: req.session.logged_in });
     } else {
       res.status(404).end();
     }

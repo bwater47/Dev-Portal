@@ -1,20 +1,13 @@
 <section>
   <h1>Homepage</h1>
-  <!-- Display all posts for each post in the postArray -->
   {{#each postArray}}
     <div>
-      <h2>{{title}}</h2>
-      <p>{{post_content}}</p>
-      <p>Posted by: {{post_username}}</p>
-      <p>Posted on: {{date}}</p>
-      <!-- This is the add comment route -->
-      {{#if loggedIn}}
-        <a href='/addComment/{{id}}'>Add Comment</a>
-      {{/if}}
-      <!-- This is the view comments route -->
-      <a id='view-comment-btn' href='/viewComments/{{id}}'>View Comments</a>
+      <h2><a href='/post/{{id}}'>{{title}}</a></h2>
+      <p>Posted on: {{format_date}}</p>
+      <!-- Display comments for the post -->
+      {{#each comments}}
+        <p>{{this}}</p>
+      {{/each}}
     </div>
   {{/each}}
 </section>
-
-<script src='./js/comment.js'></script>

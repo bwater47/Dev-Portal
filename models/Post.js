@@ -22,10 +22,6 @@ Post.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    post_username: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     date: {
       type: DataTypes.DATE,
       allowNull: false,
