@@ -1,18 +1,18 @@
-// Line 2-3: Import the necessary modules
+// Import the necessary modules
 const router = require('express').Router();
 const { Post, Users } = require('../models');
-// Line 5: Create a new router object
+// Create a new router object
 router.get('/', async (req, res) => {
-  // Line 7: Try catch block to catch errors
+  // Try catch block to catch errors
   try {
-    // Line 9: Find all posts and include the user that posted the comment
+    // Find all posts and include the user that posted the comment
     const allPosts = await Post.findAll({
       include: [Users],
     });
-    // Line 12: Map over the posts and serialize them
+    // Map over the posts and serialize them
     const postArray = allPosts.map((post) => post.get({ plain: true }));
     console.log(postArray);
-    // Line 15: Render the homepage template and pass the serialized posts into the template
+    // Render the homepage template and pass the serialized posts into the template
     res.render('homepage', { postArray, loggedIn: req.session.logged_in });
   } catch (err) {
     console.error(err);
@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/signup', async (req, res) => {
-  // Line 7: Try catch block to catch errors
+  // Try catch block to catch errors
   try {
     // Render the homepage template and pass the serialized posts into the template
     res.render('signup');
@@ -32,7 +32,7 @@ router.get('/signup', async (req, res) => {
 });
 
 router.get('/login', async (req, res) => {
-  // Line 7: Try catch block to catch errors
+  // Try catch block to catch errors
   try {
     // Render the homepage template and pass the serialized posts into the template
     res.render('login');
@@ -41,23 +41,29 @@ router.get('/login', async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+// Create a post route for the login form submission
 router.post('/login', async (req, res) => {
+  // try catch block with async/await to catch errors
   try {
+    // Find the user by the email entered in the login form
     const userData = await Users.findOne({ where: { email: req.body.email } });
+    // If the email is incorrect, send a message back to the client
     if (!userData) {
       res
         .status(400)
         .json({ message: 'Incorrect email or password, please try again' });
       return;
     }
+    // Check the password entered in the login form against the hashed password stored in the database
     const validPassword = await userData.checkPassword(req.body.password);
+    // If the password is incorrect, send a message back to the client
     if (!validPassword) {
       res
         .status(400)
         .json({ message: 'Incorrect email or password, please try again' });
       return;
     }
+    // Save the user_id and logged_in status to the session
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
@@ -69,7 +75,7 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/logout', async (req, res) => {
-  // Line 7: Try catch block to catch errors
+  // Try catch block to catch errors
   try {
     // Render the logout template
     res.render('logout');

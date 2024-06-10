@@ -17,7 +17,12 @@ const hbs = exphbs.create({ helpers });
 // Line 18-26: Define the session object
 const sess = {
   secret: 'Super secret secret',
-  cookie: {},
+  cookie: {
+    maxAge: 60000,
+    httpOnly: true,
+    secure: false,
+    sameSite: 'strict'
+  },
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
