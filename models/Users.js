@@ -9,7 +9,7 @@ class Users extends Model {
     return bcrypt.compareSync(loginPw, this.password);
   }
 }
-// create fields/columns for User model
+// create fields/columns for Users model
 Users.init(
   {
     id: {
@@ -50,7 +50,8 @@ Users.init(
     sequelize,
     freezetablename: true,
     underscored: true,
-    modelName: 'users',
+    timestamps: false,
+    modelName: 'Users',
   }
 );
 

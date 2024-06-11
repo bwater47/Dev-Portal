@@ -20,6 +20,8 @@ router.get('/', async (req, res) => {
   }
 });
 
+// router.post('/posts', async (req, res) => {
+
 router.get('/signup', async (req, res) => {
   // Try catch block to catch errors
   try {

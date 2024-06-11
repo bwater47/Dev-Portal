@@ -1,23 +1,20 @@
 [
     {
-        "post.id": 1,
+        "user_id": 1,
         "title": "The Shawshank Redemption",
         "post_content": "Two imprisoned dudes",
-        "users.username": "admin",
-        "date": "2022-12-31"
+        "username": "admin"
     },
     {
-        "post.id": 2,
+        "user_id": 2,
         "title": "The Godfather",
         "post_content": "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
-        "users.username": "admin",
-        "date": "2022-12-31"
+        "username": "admin"
     },
     {
-        "post.id": 3,
+        "user_id": 3,
         "title": "The Dark Knight",
         "post_content": "When the menace known as the Joker emerges from his mysterious past, he wreaks havoc and chaos on the people of Gotham.",
-        "users.username": "admin",
-        "date": "2022-12-31"
+        "username": "admin"
     }
 ]

@@ -30,16 +30,4 @@ router.post('/', async (req, res) => {
   }
 });
 
-// logout route to destroy the session and log the user out
-router.post('/logout', (req, res) => {
-  // Line 57-62: If the user is logged in, the session is destroyed and a 204 status is returned with no content (204 status)
-  if (req.session.logged_in) {
-    req.session.destroy(() => {
-      res.status(204).end();
-    });
-  } else {
-    res.status(404).end();
-  }
-});
-
 module.exports = router;

@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
-// route to create a new comment
+// route to get the dashboard
 router.get('/', withAuth, async (req, res) => {
   try {
     res.render('dashboard', { loggedIn: req.session.logged_in });

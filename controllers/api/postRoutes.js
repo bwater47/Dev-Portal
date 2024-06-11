@@ -1,9 +1,10 @@
+
 const router = require('express').Router();
 const { Post } = require('../../models');
 const withAuth = require('../../utils/auth');
-
+// these will use the endpoint of /api/posts
 // route to create a new post
-router.post('/post', withAuth, async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
   try {
     // Line 9-11: a new post is created and the user_id is set to the session's user_id
     const newPost = await Post.create({
@@ -18,10 +19,10 @@ router.post('/post', withAuth, async (req, res) => {
 });
 
 // route to get a specific post
-router.get('/post/:id', withAuth, async (req, res) => {
+router.get('/:id', withAuth, async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id);
-    console.log(postData);
+    
     if (postData) {
       const post = postData.get({ plain: true });
 
@@ -31,23 +32,6 @@ router.get('/post/:id', withAuth, async (req, res) => {
     }
   } catch (err) {
     res.status(500).json(err);
-  }
-});
-
-// route to edit a post
-router.get('/post/:id', withAuth, async (req, res) => {
-  try {
-    const postData = await Post.findByPk(req.params.id);
-
-    if (postData) {
-      const post = postData.get({ plain: true });
-
-      res.render('post', { post, loggedIn: req.session.logged_in });
-    } else {
-      res.status(404).end();
-    }
-  } catch (err) {
-    res.redirect('login');
   }
 });
 
