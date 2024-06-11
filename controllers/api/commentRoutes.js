@@ -2,13 +2,13 @@ const router = require('express').Router();
 const { Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-router.get('/', withAuth, async (req, res) => {
-  try {
-    res.render('dashboard');
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
+// router.get('/', withAuth, async (req, res) => {
+//   try {
+//     res.render('dashboard');
+//   } catch (err) {
+//     res.status(400).json(err);
+//   }
+// });
 
 // route to create a new comment
 router.post('/', withAuth, async (req, res) => {
@@ -26,7 +26,7 @@ router.post('/', withAuth, async (req, res) => {
 });
 
 // route to view a comment
-router.get('/Comment/:id', withAuth, async (req, res) => {
+router.get('/:id', withAuth, async (req, res) => {
   try {
     const commentData = await Comment.findByPk(req.params.id);
 
@@ -43,9 +43,13 @@ router.get('/Comment/:id', withAuth, async (req, res) => {
 });
 
 // route to add a new comment
-router.get('/addComment', withAuth, async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
   try {
-    res.render('addComment', { loggedIn: req.session.logged_in });
+    const newComment = await Comment.create({
+      ...req.body,
+      user_id: req.session.user_id,
+    });
+    res.status(200).json(newComment);
   } catch (err) {
     res.status(400).json(err);
   }

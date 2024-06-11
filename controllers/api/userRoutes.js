@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { Users } = require('../../models');
 
 // Route to get all users and exclude the password column
-router.get('/', async (req, res) => {
+router.get('/', async (_, res) => {
   try {
     const userData = await Users.findAll({
       attributes: { exclude: ['password'] },

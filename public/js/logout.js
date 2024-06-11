@@ -2,7 +2,7 @@
 const logout = async (event) => {
   event.preventDefault();
   // Fetch request to logout the user using the POST method
-  const response = await fetch('/api/users/logout', {
+  const response = await fetch('/api/logout', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
   });

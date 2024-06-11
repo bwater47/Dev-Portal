@@ -5,9 +5,9 @@
       <h2><a href='/api/posts/{{id}}'>{{title}}</a></h2>
       <p>Posted on: {{format_date}}</p>
       <!-- Display comments for the post -->
-      {{#each comments}}
-        <p>{{this}}</p>
-      {{/each}}
+      <div>
+        {{> comments}}
+      </div>
     </div>
   {{/each}}
 </section>

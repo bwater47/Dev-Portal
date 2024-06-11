@@ -1,10 +1,9 @@
-<!-- This is the form for creating a new post. It has fields for the title and post content. -->
 {{#if loggedIn}}
   <section>
     <div class='container'>
       <div class='row'>
         <div class='col-md-12'>
-          <h2><a href='/api/posts' New Post</h2>
+          <h2><a href='/api/posts'>New Post</a></h2>
           <form id='newPostForm'>
             <div class='form-group'>
               <label for='title'>Title</label>
@@ -26,4 +25,4 @@
   </section>
 {{/if}}
 
-<script src='/js/newPost.js'></script>
+<script src='../public/js/newPost.js'></script>

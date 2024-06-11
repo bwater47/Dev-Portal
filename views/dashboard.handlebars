@@ -20,6 +20,10 @@
             </li>
           {{/each}}
         </ul>
+
+        {{#if loggedIn}}
+          <a href='/newPost' class='btn btn-primary'>New Post</a>
+        {{/if}}
       </div>
     </div>
   </div>

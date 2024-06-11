@@ -20,7 +20,18 @@ router.get('/', async (req, res) => {
   }
 });
 
-// router.post('/posts', async (req, res) => {
+router.post('/posts', async (req, res) => {
+  // Try catch block to catch errors
+  try {
+    // Create a new post using the request body
+    const newPost = await Post.create(req.body);
+    // Send a response indicating that the post was created successfully
+    res.status(200).json(newPost);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+});
 
 router.get('/signup', async (req, res) => {
   // Try catch block to catch errors
@@ -73,13 +84,26 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/logout', async (req, res) => {
-  // Try catch block to catch errors
+  // Try catch block with async/await to catch errors
   try {
-    // Render the logout template
-    res.render('logout');
+    // Destroy the session to log the user out
+    req.session.destroy(() => {
+      res.redirect('/');
+    });
   } catch (err) {
-    console.error(err);
-    res.status(500).json(err);
+    res.status(400).json(err);
+  }
+});
+
+router.post('/logout', async (req, res) => {
+  // Try catch block with async/await to catch errors
+  try {
+    // Destroy the session to log the user out
+    req.session.destroy(() => {
+      res.redirect('/');
+    });
+  } catch (err) {
+    res.status(400).json(err);
   }
 });
 

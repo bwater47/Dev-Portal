@@ -1,22 +1,3 @@
-const viewCommentHandler = async (event) => {
-  event.preventDefault();
-  const post_id = window.location.toString().split('/')[
-    window.location.toString().split('/').length - 1
-  ];
-  const response = await fetch(`/api/comments/${post_id}`);
-  if (response.ok) {
-    const comments = await response.json();
-    // Display the comments on the page
-    console.log(comments);
-  } else {
-    alert('Failed to fetch comments');
-  }
-};
-
-document
-  .querySelector('#view-comment-btn')
-  .addEventListener('click', viewCommentHandler);
-
 // The newCommentHandler function is similar to the newPost and editPost functions, but it creates a new comment instead of a new post. The deleteCommentHandler function is similar to the deletePostHandler function, but it deletes a comment instead of a post.
 const newCommentHandler = async (event) => {
   // Stop the browser from submitting the form by default so we can do so with JavaScript
@@ -24,9 +5,7 @@ const newCommentHandler = async (event) => {
   // Get the comment content from the form
   const comment = document.querySelector('#comment-content').value.trim();
   // Get the post id from the URL
-  const post_id = window.location.toString().split('/')[
-    window.location.toString().split('/').length - 1
-  ];
+  const post_id = window.location.toString().split('/')[window.location.toString().split('/').length - 1];
   // If the comment field isn't empty, send the comment data to the comment route
   if (comment) {
     const response = await fetch('/api/comments', {
