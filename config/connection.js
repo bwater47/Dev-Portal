@@ -13,7 +13,9 @@ if (process.env.DB_URL) {
     process.env.DB_PASSWORD,
     {
       host: 'localhost',
-      dialect: 'postgres'
+      dialect: 'postgres',
+      protocol: 'postgres',
+      logging: false
     }
   );
 }
