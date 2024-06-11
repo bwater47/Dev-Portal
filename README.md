@@ -20,7 +20,7 @@ Here is a table of contents to make it easy for users to locate which section th
 
 ## Installation
 
-You'll need to install GitBash, VS Code, Node.js, NPM bcrypt, NPM connect-session-sequelize, NPM dayjs, NPM express-handlebars, NPM express-session, NPM dotenv, NPM pg, NPM sequelize, Express, PostgreSQL, and Nodemon. From here you will need knowledge on how to clone a repo from GitHub over to your device to store it locally. Once its stored locally on your device you can open VSCode. Lastly once VSCode is running open the CLI (Command-Line-Interface), type npm install for the node_modules packages, establish the database using postgreSQL, and then run the server using NPM run dev. Once you've done this the website can be deployed locally for testing, debugging, and developing.
+You'll need to install GitBash, VS Code, Node.js, and run NPM Install for the dependencies. From here you will need knowledge on how to clone a repo from GitHub over to your device to store it locally. Once its stored locally on your device you can open VSCode. Lastly once VSCode is running open the CLI (Command-Line-Interface), type npm install for the node_modules packages, establish the database using postgreSQL, and then run the server using NPM run dev. Once you've done this the website can be deployed locally for testing, debugging, and developing.
 
 ## Usage
 
@@ -44,7 +44,7 @@ N/A
 
 ## Credits
 
-People who worked on this project were bwater47. You can contact the contributors through the github profiles links listed here.
+People who worked on this project were Brennan Waterbury. You can contact the contributors through the github profiles links listed here.
 - Link: <a href="https://github.com/bwater47" alt="GitHub Link">GitHub Profile</a>
 
 ## License
@@ -54,7 +54,7 @@ People who worked on this project were bwater47. You can contact the contributor
 
 ## Features
 
-CMS-style blog site: Allows the client to clone the code and use the backend service for an ecommerce website without an existing backend.
+CMS-style blog site: Allows the client to make an account and create blog posts.
 
 ## Contributing
 
