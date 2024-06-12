@@ -35,25 +35,13 @@ router.delete('/:id', withAuth, async (req, res) => {
 });
 
 // route to get a new post
-router.get('/newPost', withAuth, async (req, res) => {
+router.get('/new', withAuth, async (req, res) => {
   try {
     res.render('newPost', { loggedIn: req.session.logged_in });
   } catch (err) {
     res.status(400).json(err);
   }
-});
-
-router.post('/newPost', withAuth, async (req, res) => {
-  try {
-    const newPost = await Comment.create({
-      ...req.body,
-      user_id: req.session.user_id,
-    });
-
-    res.status(200).json(newPost);
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
+}
+);
 
 module.exports = router;

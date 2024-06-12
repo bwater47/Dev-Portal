@@ -7,7 +7,7 @@ const newPost = async (event) => {
   const content = document.querySelector('#post-content').value.trim();
   // Line 9-15: If the title and content exist, a POST request is made to the /api/posts route with the title and content in the body of the request
   if (title && content) {
-    const response = await fetch('/api/posts', {
+    const response = await fetch('/api/posts/new', {
       method: 'POST',
       body: JSON.stringify({ title, content }),
       headers: { 'Content-Type': 'application/json' },

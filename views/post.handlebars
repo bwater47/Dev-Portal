@@ -14,11 +14,12 @@
     </div>
     <div>
         <textarea id="comment-content" placeholder="Enter your comment here"></textarea>
-        <button id="new-comment-form">Submit</button>
+        <button id="new-comment-form" action="post">Submit</button>
+    </div>
     </div>
 </div>
 {{/if}}
 
 {{#if loggedIn}}
-    <script src='../../public/js/comment.js'></script>
+    <script src='/js/comment.js'></script>
 {{/if}}

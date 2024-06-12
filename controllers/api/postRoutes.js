@@ -80,4 +80,11 @@ router.delete('/:id', withAuth, async (req, res) => {
   }
 });
 
+// route to create a new post
+router.get('/new', withAuth, (req, res) => {
+  res.render('newPost', {
+    loggedIn: req.session.logged_in,
+  });
+});
+
 module.exports = router;

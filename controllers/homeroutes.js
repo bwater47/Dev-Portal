@@ -107,4 +107,22 @@ router.post('/logout', async (req, res) => {
   }
 });
 
+router.get('/dashboard', async (req, res) => {
+  // Try catch block to catch errors
+  try {
+    // Find all posts and include the user that posted the comment
+    const allPosts = await Post.findAll({
+      include: [Users],
+    });
+    // Map over the posts and serialize them
+    const postArray = allPosts.map((post) => post.get({ plain: true }));
+    console.log(postArray);
+    // Render the homepage template and pass the serialized posts into the template
+    res.render('dashboard', { postArray, loggedIn: req.session.logged_in });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
