@@ -3,9 +3,9 @@ const newCommentHandler = async (event) => {
   event.preventDefault();
   const post_id = document.querySelector('#post-id').value?.trim();
   const comment_text = document.querySelector('#comment-content').value?.trim();
-
+  // This if statment checks if the post_id and comment_text exist
   if (post_id && comment_text) {
-    const response = await fetch('/dashboard/comments/new', {
+    const response = await fetch(`/api/comments/newComment`, {
       method: 'POST',
       body: JSON.stringify({ post_id, comment_text }),
       headers: {
@@ -14,6 +14,7 @@ const newCommentHandler = async (event) => {
     });
 
     if (response.ok) {
+      // Clear the comment form after successful submission
       document.location.replace('/dashboard');
     } else {
       alert('Failed to create comment');
@@ -25,24 +26,3 @@ const newCommentHandler = async (event) => {
 document
   .querySelector('#new-comment-form')
   .addEventListener('submit', newCommentHandler);
-// This function is used to delete a comment
-const deleteCommentHandler = async (event) => {
-  if (event.target.hasAttribute('data-id')) {
-    const id = event.target.getAttribute('data-id');
-    // Send a DELETE request to the comment route with the id of the comment to be deleted
-    const response = await fetch(`/api/comments/${id}`, {
-      method: 'DELETE',
-    });
-
-    if (response.ok) {
-      // Remove the deleted comment from the DOM
-      event.target.parentElement.remove();
-    } else {
-      alert('Failed to delete comment');
-    }
-  }
-};
-// Add an event listener to each comment's delete button to listen for a click event and call the deleteCommentHandler function
-document.querySelectorAll('#delete-comment-btn').forEach((button) => {
-  button.addEventListener('click', deleteCommentHandler);
-});

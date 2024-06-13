@@ -1,4 +1,3 @@
-
 const router = require('express').Router();
 const { Post } = require('../../models');
 const withAuth = require('../../utils/auth');
@@ -31,14 +30,14 @@ router.post('/new', withAuth, async (req, res) => {
 });
 
 // route to get a specific post
-router.get('/:id', withAuth, async (req, res) => {
+router.get('/editpost/:id', withAuth, async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id);
     
     if (postData) {
       const post = postData.get({ plain: true });
 
-      res.render('post', { post, loggedIn: req.session.logged_in });
+      res.render('editPost', { post, loggedIn: req.session.logged_in });
     } else {
       res.status(404).end();
     }
@@ -48,7 +47,7 @@ router.get('/:id', withAuth, async (req, res) => {
 });
 
 // route to update a post
-router.put('/:id', withAuth, async (req, res) => {
+router.put('/editpost/:id', withAuth, async (req, res) => {
   try {
     // Line 24-27: The post is updated if the user_id matches the session's user_id and the post id matches the id in the request
     const postData = await Post.update(req.body, {
@@ -70,7 +69,7 @@ router.put('/:id', withAuth, async (req, res) => {
 });
 
 // route to delete a post
-router.delete('/:id', withAuth, async (req, res) => {
+router.delete('/editpost/:id', withAuth, async (req, res) => {
   try {
     // Line 46-51: The post is deleted if the user_id matches the session's user_id
     const postData = await Post.destroy({

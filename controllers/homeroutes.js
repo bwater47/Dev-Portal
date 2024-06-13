@@ -1,7 +1,8 @@
-// Import the necessary modules
 const router = require('express').Router();
-const { Post, Users } = require('../models');
-// Create a new router object
+const { Post, Users, Comment } = require('../models');
+// These endpoints will use the / route
+
+// Create a get route for the homepage
 router.get('/', async (req, res) => {
   // Try catch block to catch errors
   try {
@@ -20,19 +21,25 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/posts', async (req, res) => {
+router.get('/dashboard', async (req, res) => {
   // Try catch block to catch errors
   try {
-    // Create a new post using the request body
-    const newPost = await Post.create(req.body);
-    // Send a response indicating that the post was created successfully
-    res.status(200).json(newPost);
+    // Find all posts and include the user that posted the comment
+    const allPosts = await Post.findAll({
+      include: [Users],
+    });
+    // Map over the posts and serialize them
+    const postArray = allPosts.map((post) => post.get({ plain: true }));
+    console.log(postArray);
+    // Render the homepage template and pass the serialized posts into the template
+    res.render('dashboard', { postArray, loggedIn: req.session.logged_in });
   } catch (err) {
     console.error(err);
     res.status(500).json(err);
   }
 });
 
+// Create a get route for the signup page
 router.get('/signup', async (req, res) => {
   // Try catch block to catch errors
   try {
@@ -44,6 +51,7 @@ router.get('/signup', async (req, res) => {
   }
 });
 
+// Create a get route for the login page
 router.get('/login', async (req, res) => {
   // Try catch block to catch errors
   try {
@@ -54,6 +62,7 @@ router.get('/login', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 // Create a post route for the login form submission
 router.post('/login', async (req, res) => {
   // try catch block with async/await to catch errors
@@ -83,44 +92,33 @@ router.post('/login', async (req, res) => {
   }
 });
 
-router.get('/logout', async (req, res) => {
-  // Try catch block with async/await to catch errors
-  try {
-    // Destroy the session to log the user out
-    req.session.destroy(() => {
-      res.redirect('/');
-    });
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
-
+// Create a get route for the logout page
 router.post('/logout', async (req, res) => {
   // Try catch block with async/await to catch errors
   try {
     // Destroy the session to log the user out
     req.session.destroy(() => {
-      res.redirect('/');
+      res.redirect('/homepage');
     });
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
-router.get('/dashboard', async (req, res) => {
-  // Try catch block to catch errors
+router.get('/post/:id', async (req, res) => {
   try {
-    // Find all posts and include the user that posted the comment
-    const allPosts = await Post.findAll({
-      include: [Users],
+    const postData = await Post.findByPk(req.params.id, {
+      include: [Users, { model: Comment, include: [Users] }],
     });
-    // Map over the posts and serialize them
-    const postArray = allPosts.map((post) => post.get({ plain: true }));
-    console.log(postArray);
-    // Render the homepage template and pass the serialized posts into the template
-    res.render('dashboard', { postArray, loggedIn: req.session.logged_in });
+
+    const post = postData.get({ plain: true });
+    console.log(post);
+
+    res.render('post', {
+      ...post,
+      loggedIn: req.session.logged_in,
+    });
   } catch (err) {
-    console.error(err);
     res.status(500).json(err);
   }
 });

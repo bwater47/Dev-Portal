@@ -2,12 +2,10 @@
 <section>
   <h3>Comments</h3>
   <!-- Display all comments for each comment in the commentArray -->
-  {{#each comments as |comment|}}
     <article>
       <input type="hidden" id="post_id" value="{{post.id}}">
-      <p>{{comment.comment_text}}</p>
-      <p>Created by: {{users.username}}</p>
+      <p>{{comment_text}}</p>
+      <p>Created by: {{User.username}}</p>
       <p>Created on: {{format_date}}</p>
     </article>
-  {{/each}}
 </section>

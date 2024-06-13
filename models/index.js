@@ -23,10 +23,6 @@ Comment.belongsTo(Users, {
   onDelete: 'CASCADE',
 });
 // Comments belong to Users
-Comment.belongsTo(Post, {
-  foreignKey: 'Post_id',
-  onDelete: 'CASCADE',
-});
 
 // Export the models
 module.exports = { Users, Post, Comment };

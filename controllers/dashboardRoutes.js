@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Comment, Post } = require('../models');
 const withAuth = require('../utils/auth');
+// These endpoints will use the /dashboard route
 
 // route to get the dashboard
 router.get('/', withAuth, async (req, res) => {
@@ -11,8 +12,41 @@ router.get('/', withAuth, async (req, res) => {
   }
 });
 
+// route to get posts by user
+router.get('/posts', withAuth, async (req, res) => {
+  try {
+    const postData = await Post.findAll({
+      where: {
+        user_id: req.session.user_id,
+      },
+    });
+    const posts = postData.map((post) => post.get({ plain: true }));
+    res.render('all-posts-admin', {
+      layout: 'dashboard',
+      posts,
+    });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+// route to get a specific comment
+router.get('/comments/:id', withAuth, async (req, res) => {
+  try {
+    const commentData = await Comment.findByPk(req.params.id);
+    if (!commentData) {
+      res.status(404).json({ message: 'No comment found with this id!' });
+      return;
+    }
+    const comment = commentData.get({ plain: true });
+    res.render('comment', { comment, loggedIn: req.session.logged_in });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 // route to get all comments
-router.get('/comments/new', withAuth, async (req, res) => {
+router.get('/comments', withAuth, async (req, res) => {
   try {
     const commentData = await Comment.findOne({
       where: {
@@ -23,7 +57,7 @@ router.get('/comments/new', withAuth, async (req, res) => {
       res.status(404).json({ message: 'No comment found with this id!' });
       return;
     }
-    res.render('newComment', {
+    res.render('dashboard', {
       loggedIn: req.session.logged_in,
       comment: commentData,
     });
@@ -34,7 +68,7 @@ router.get('/comments/new', withAuth, async (req, res) => {
 });
 
 // route to create a new comment
-router.post('/comments/new', withAuth, async (req, res) => {
+router.post('/comments', withAuth, async (req, res) => {
   try {
     const newComment = await Comment.create({
       ...req.body,
@@ -104,7 +138,7 @@ router.post('/posts/new', withAuth, async (req, res) => {
 });
 
 // route to get a specific post
-router.get('/posts/:id', withAuth, async (req, res) => {
+router.get('/posts/editpost/:id', withAuth, async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id);
     if (!postData) {
@@ -119,7 +153,7 @@ router.get('/posts/:id', withAuth, async (req, res) => {
 });
 
 // route to update a post
-router.put('/posts/:id', withAuth, async (req, res) => {
+router.put('/posts/editpost/:id', withAuth, async (req, res) => {
   try {
     const postData = await Post.update(req.body, {
       where: {
@@ -138,7 +172,7 @@ router.put('/posts/:id', withAuth, async (req, res) => {
 });
 
 // route to delete a post
-router.delete('/posts/:id', withAuth, async (req, res) => {
+router.delete('/posts/editpost/:id', withAuth, async (req, res) => {
   try {
     const postData = await Post.destroy({
       where: {

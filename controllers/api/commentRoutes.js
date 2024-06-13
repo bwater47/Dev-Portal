@@ -4,49 +4,30 @@ const withAuth = require('../../utils/auth');
 // these will use the endpoint of /api/comments
 
 // route to get all comments
-router.get('/new', withAuth, async (req, res) => {
-  try {
-    res.render('newComment', {
-      loggedIn: req.session.logged_in,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+// router.get('/newComment', withAuth, async (req, res) => {
+//   try {
+//     res.render('dashboard', {
+//       loggedIn: req.session.logged_in,
+//     });
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
-// route to create a new comment
-router.post('/new', withAuth, async (req, res) => {
+// Route to create a new comment associated with a specific post
+router.post('/newComment', withAuth, async (req, res) => {
   try {
-    // create a new comment with the user id attached
+    // const { postId } = req.params;
+    // Create a new comment with the post ID attached
     const newComment = await Comment.create({
       ...req.body,
-      comment_text: req.body.comment_text,
+      post_id: req.body.post_id,
+      user_id: req.session.user_id, // Assuming you want to associate the comment with the logged-in user
     });
-    // send the new serialized comment back as a JSON response
+    // Send the new serialized comment back as a JSON response
     res.status(200).json(newComment);
   } catch (err) {
     res.status(400).json(err);
-  }
-});
-
-// route to delete a comment
-router.delete('/:id', withAuth, async (req, res) => {
-  try {
-    const commentData = await Comment.destroy({
-      where: {
-        id: req.params.id,
-        user_id: req.session.user_id,
-      },
-    });
-
-    if (!commentData) {
-      res.status(404).json({ message: 'No comment found with this id!' });
-      return;
-    }
-
-    res.status(200).json(commentData);
-  } catch (err) {
-    res.status(500).json(err);
   }
 });
 
