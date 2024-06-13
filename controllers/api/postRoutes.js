@@ -4,15 +4,26 @@ const { Post } = require('../../models');
 const withAuth = require('../../utils/auth');
 // these will use the endpoint of /api/posts
 
-// route to create a new post
-router.post('/', withAuth, async (req, res) => {
+// route to get a new post
+router.get('/new', withAuth, async (req, res) => {
   try {
-    // Line 9-11: a new post is created and the user_id is set to the session's user_id
+    res.render('newPost', {
+      loggedIn: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// route to create a new post
+router.post('/new', withAuth, async (req, res) => {
+  try {
+    // Line 24-26: The new post is created with the title and content from the request body and the user_id from the session
     const newPost = await Post.create({
       ...req.body,
       user_id: req.session.user_id,
     });
-    // Line 14: The new post is serialized and sent back as a JSON response
+    // Line 28-33: If the new post is created, a 200 status is returned, otherwise a 400 status is returned
     res.status(200).json(newPost);
   } catch (err) {
     res.status(400).json(err);
@@ -78,13 +89,6 @@ router.delete('/:id', withAuth, async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-});
-
-// route to create a new post
-router.get('/new', withAuth, (req, res) => {
-  res.render('newPost', {
-    loggedIn: req.session.logged_in,
-  });
 });
 
 module.exports = router;

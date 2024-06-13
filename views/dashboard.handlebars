@@ -6,24 +6,25 @@
         <p>Welcome to your dashboard {{this.users.username}}!</p>
 
         <h2>Your Posts</h2>
-        <section>
-          <input type='hidden' id='post_id' value='{{post.id}}' />
-          <h2>{{post.title}}</h2>
-          <p>{{post.post_content}}</p>
-          <p>By: {{users.username}}</p>
-          <p>Date: {{format_date}}</p>
-        </section>
-        <ul>
-          {{#each posts}}
-            <li>
-              <a href='/post/{{id}}'>{{title}}</a>
-            </li>
-          {{/each}}
-        </ul>
-
         {{#if loggedIn}}
           <a href='/api/posts/new' class='btn btn-primary'>New Post</a>
         {{/if}}
+        {{#each postArray}}
+          <section>
+            <input type='hidden' id='post_id' value='{{id}}' />
+            <h2>{{title}}</h2>
+            <p>{{post_content}}</p>
+            <p>By: {{user.username}}</p>
+            <p>Date: {{format_date}}</p>
+          </section>
+        {{/each}}
+        <ul>
+          {{#each posts}}
+            <li>
+              <a href='/posts/{{id}}'>{{title}}</a>
+            </li>
+          {{/each}}
+        </ul>
       </div>
     </div>
   </div>

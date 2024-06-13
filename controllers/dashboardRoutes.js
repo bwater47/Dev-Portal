@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Comment } = require('../models');
+const { Comment, Post } = require('../models');
 const withAuth = require('../utils/auth');
 
 // route to get the dashboard
@@ -35,13 +35,89 @@ router.delete('/:id', withAuth, async (req, res) => {
 });
 
 // route to get a new post
-router.get('/new', withAuth, async (req, res) => {
+router.get('/posts/new', withAuth, async (req, res) => {
   try {
-    res.render('newPost', { loggedIn: req.session.logged_in });
+    const postData = await Post.findOne({
+      where: {
+        id: 'user_id',
+      },
+    });
+    if (!postData) {
+      res.status(404).json({ message: 'No post found with this id!' });
+      return;
+    }
+    res.render('newPost', { loggedIn: req.session.logged_in, post: postData });
   } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+});
+
+// route to create a new post
+router.post('/posts/new', withAuth, async (req, res) => {
+  try {
+    const newPost = await Post.create({
+      ...req.body,
+      user_id: req.session.user_id,
+    });
+    res.status(200).json(newPost);
+  } catch (err) {
+    console.error(err);
     res.status(400).json(err);
   }
-}
-);
+});
+
+// route to get a specific post
+router.get('/posts/:id', withAuth, async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id);
+    if (!postData) {
+      res.status(404).json({ message: 'No post found with this id!' });
+      return;
+    }
+    const post = postData.get({ plain: true });
+    res.render('post', { post, loggedIn: req.session.logged_in });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// route to update a post
+router.put('/posts/:id', withAuth, async (req, res) => {
+  try {
+    const postData = await Post.update(req.body, {
+      where: {
+        id: req.params.id,
+        user_id: req.session.user_id,
+      },
+    });
+    if (!postData) {
+      res.status(404).json({ message: 'No post found with this id!' });
+      return;
+    }
+    res.status(200).json(postData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// route to delete a post
+router.delete('/posts/:id', withAuth, async (req, res) => {
+  try {
+    const postData = await Post.destroy({
+      where: {
+        id: req.params.id,
+        user_id: req.session.user_id,
+      },
+    });
+    if (!postData) {
+      res.status(404).json({ message: 'No post found with this id!' });
+      return;
+    }
+    res.status(200).json(postData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 module.exports = router;
