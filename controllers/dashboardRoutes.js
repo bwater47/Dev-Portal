@@ -11,6 +11,42 @@ router.get('/', withAuth, async (req, res) => {
   }
 });
 
+// route to get all comments
+router.get('/comments/new', withAuth, async (req, res) => {
+  try {
+    const commentData = await Comment.findOne({
+      where: {
+        id: 'user_id',
+      },
+    });
+    if (!commentData) {
+      res.status(404).json({ message: 'No comment found with this id!' });
+      return;
+    }
+    res.render('newComment', {
+      loggedIn: req.session.logged_in,
+      comment: commentData,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+});
+
+// route to create a new comment
+router.post('/comments/new', withAuth, async (req, res) => {
+  try {
+    const newComment = await Comment.create({
+      ...req.body,
+      user_id: req.session.user_id,
+    });
+    res.status(200).json(newComment);
+  } catch (err) {
+    console.error(err);
+    res.status(400).json(err);
+  }
+});
+
 // route to delete a comment
 router.delete('/:id', withAuth, async (req, res) => {
   try {

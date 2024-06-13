@@ -11,20 +11,15 @@
         {{/if}}
         {{#each postArray}}
           <section>
-            <input type='hidden' id='post_id' value='{{id}}' />
-            <h2>{{title}}</h2>
-            <p>{{post_content}}</p>
-            <p>By: {{user.username}}</p>
-            <p>Date: {{format_date}}</p>
+        <a href='/api/editPost/{{id}}' class='post-box'>
+          <input type='hidden' id='post-id' value='{{id}}' />
+          <h2>{{title}}</h2>
+          <p>{{post_content}}</p>
+          <p>By: {{user.username}}</p>
+          <p>Date: {{format_date}}</p>
+        </a>
           </section>
         {{/each}}
-        <ul>
-          {{#each posts}}
-            <li>
-              <a href='/posts/{{id}}'>{{title}}</a>
-            </li>
-          {{/each}}
-        </ul>
       </div>
     </div>
   </div>
