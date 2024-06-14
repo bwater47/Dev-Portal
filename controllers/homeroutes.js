@@ -65,7 +65,7 @@ router.get('/login', async (req, res) => {
 
 // Create a post route for the login form submission
 router.post('/login', async (req, res) => {
-  // try catch block with async/await to catch errors
+  // Try catch block with async/await to catch errors
   try {
     // Find the user by the email entered in the login form
     const userData = await Users.findOne({ where: { email: req.body.email } });
@@ -105,15 +105,17 @@ router.post('/logout', async (req, res) => {
   }
 });
 
+// Post route for the signup form submission
 router.get('/post/:id', async (req, res) => {
   try {
+    // Find the post by the primary key and include the user that posted the comment
     const postData = await Post.findByPk(req.params.id, {
       include: [Users, { model: Comment, include: [Users] }],
     });
-
+    // If the post is not found, return a 404 status
     const post = postData.get({ plain: true });
     console.log(post);
-
+    // Render the post template and pass the serialized post data into the template
     res.render('post', {
       ...post,
       loggedIn: req.session.logged_in,

@@ -1,49 +1,50 @@
+/* This is the CSS file for the application */
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-  }
-  
-  header {
-    background-color: #333;
-    padding: 10px 0;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-  }
-  
-  header ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: space-around;
-  }
-  
-  header li {
-    margin: 0 15px;
-  }
-  
-  header a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 16px;
-  }
-  
-  header a:hover {
-    text-decoration: underline;
-  }
-  
-  main {
-    padding-top: 60px; /* To ensure content doesn't overlap with the fixed header */
-  }
-  
-  footer {
-    text-align: center;
-    padding: 20px 0;
-    margin-top: 5rem;
-    background-color: #f1f1f1;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-  }
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background-color: #333;
+  padding: 10px 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+header ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+header li {
+  margin: 0 15px;
+}
+
+header a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+header a:hover {
+  text-decoration: underline;
+}
+/* Add padding to the main content to ensure that there is no overlap with the content and the header */
+main {
+  padding-top: 60px;
+}
+/* Add padding text-align margin-top background-color position bottom and width to the footer */
+footer {
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 5rem;
+  background-color: #f1f1f1;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}

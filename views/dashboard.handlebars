@@ -1,10 +1,10 @@
+<!-- The dashboard view will display the user's posts and provide a link to create a new post if logged in. -->
 <section>
   <div class='container'>
     <div class='row'>
       <div class='col-md-12'>
         <h1>Dashboard</h1>
-        <p>Welcome to your dashboard {{this.users.username}}!</p>
-
+          <p>Welcome to your dashboard{{User.username}}!</p>
         <h2>Your Posts</h2>
         {{#if loggedIn}}
           <a href='/api/posts/new' class='btn btn-primary'>New Post</a>

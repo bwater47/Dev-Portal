@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 // Utilizes the dotenv package to set environment variables
 require('dotenv').config();
 let sequelize;
-// Line 7-19: If the app is deployed, it will use the deployed database. Otherwise, it will use the local database.
+// If the app is deployed, it will use the deployed database. Otherwise, it will use the local database.
 if (process.env.DB_URL) {
   sequelize = new Sequelize(process.env.DB_URL);
 } else {

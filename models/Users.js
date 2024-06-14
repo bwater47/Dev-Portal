@@ -4,12 +4,12 @@ const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 // User model (table) by extending off Sequelize's Model class
 class Users extends Model {
-  // set up method to run on instance data (per user) to check password
+  // Set up method to run on instance data (per user) to check password
   checkPassword(loginPw) {
     return bcrypt.compareSync(loginPw, this.password);
   }
 }
-// create fields/columns for Users model
+// This is the model for the Users table in the database, which includes the id, username, email, and password fields.
 Users.init(
   {
     id: {
@@ -37,7 +37,7 @@ Users.init(
         len: [8],
       },
     },
-    // hooks are automatic methods that run during various phases of the Users Model lifecycle so this hook will automatically hash the password before it is created in the database
+    // Hooks are automatic methods that run during various phases of the Users Model lifecycle so this hook will automatically hash the password before it is created in the database.
   },
   {
     hooks: {
@@ -46,7 +46,7 @@ Users.init(
         return newUserData;
       },
     },
-
+    // These are table configuration options to go along with the model. In this case, we want the model name to be 'Users' and we want the table name to be 'users' and we want the table name to be pluralized.
     sequelize,
     freezetablename: true,
     underscored: true,

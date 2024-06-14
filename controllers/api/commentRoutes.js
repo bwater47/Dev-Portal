@@ -3,21 +3,9 @@ const { Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 // these will use the endpoint of /api/comments
 
-// route to get all comments
-// router.get('/newComment', withAuth, async (req, res) => {
-//   try {
-//     res.render('dashboard', {
-//       loggedIn: req.session.logged_in,
-//     });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
-
 // Route to create a new comment associated with a specific post
 router.post('/newComment', withAuth, async (req, res) => {
   try {
-    // const { postId } = req.params;
     // Create a new comment with the post ID attached
     const newComment = await Comment.create({
       ...req.body,

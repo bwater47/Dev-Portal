@@ -21,7 +21,7 @@ const signupFormHandler = async (event) => {
     }
   }
 };
-
+// Listens for the submit event on the signup form and calls the signupFormHandler function by selecting the element by its id
 document
   .querySelector('#signup-form')
   .addEventListener('submit', signupFormHandler);
