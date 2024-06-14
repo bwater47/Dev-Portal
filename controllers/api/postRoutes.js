@@ -29,61 +29,53 @@ router.post('/new', withAuth, async (req, res) => {
   }
 });
 
-// route to get a specific post
+// Route to get a specific post
 router.get('/editpost/:id', withAuth, async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id);
-    
-    if (postData) {
-      const post = postData.get({ plain: true });
-
-      res.render('editPost', { post, loggedIn: req.session.logged_in });
-    } else {
-      res.status(404).end();
+    if (!postData) {
+      res.status(404).json({ message: 'No post found with this id!' });
+      return;
     }
+    const post = postData.get({ plain: true });
+    res.render('editPost', { post, loggedIn: req.session.logged_in });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// route to update a post
+// Route to update a post
 router.put('/editpost/:id', withAuth, async (req, res) => {
   try {
-    // Line 24-27: The post is updated if the user_id matches the session's user_id and the post id matches the id in the request
     const postData = await Post.update(req.body, {
       where: {
         id: req.params.id,
         user_id: req.session.user_id,
       },
     });
-    // Line 31-36: If the post is not found, a 404 status is returned, otherwise the post is updated and a 200 status is returned
     if (!postData) {
       res.status(404).json({ message: 'No post found with this id!' });
       return;
     }
-    // Line 37-40: The catch block will return a 500 status if there is an error
     res.status(200).json(postData);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// route to delete a post
+// Route to delete a post
 router.delete('/editpost/:id', withAuth, async (req, res) => {
   try {
-    // Line 46-51: The post is deleted if the user_id matches the session's user_id
     const postData = await Post.destroy({
       where: {
         id: req.params.id,
         user_id: req.session.user_id,
       },
     });
-    // Line 53-62: If the post is not found, a 404 status is returned, otherwise the post is deleted and a 200 status is returned then the catch block will return a 500 status if there is an error
     if (!postData) {
       res.status(404).json({ message: 'No post found with this id!' });
       return;
     }
-
     res.status(200).json(postData);
   } catch (err) {
     res.status(500).json(err);

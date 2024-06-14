@@ -5,7 +5,6 @@
       <h3><a href="/post/{{post.id}}">Title: {{post.title}}</a></h3>
       <p>Posted on: {{format_date}}</p>
       <!-- Display comments for the post -->
-        <h4>Comments</h4>
         {{#each comments}}
           <p>{{comment}}</p>
         {{/each}}
