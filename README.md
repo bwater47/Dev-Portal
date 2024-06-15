@@ -30,6 +30,17 @@ The Dev Portal is important for Web Developers. They spend their time reading an
 
 - [Website-Link](https://dev-portal-piwn.onrender.com/)
 
+- <strong>Dev Portal Screenshots</strong>
+
+- ![Screenshot](/public/images/Homepage.png)
+- ![Screenshot](/public/images/PostLoggedIn.png)
+- ![Screenshot](/public/images/DashboardLoggedIn.png)
+- ![Screenshot](/public/images/PostLoggedOut.png)
+- ![Screenshot](/public/images/Login.png)
+- ![Screenshot](/public/images/SignUp.png)
+- ![Screenshot](/public/images/EditedPost.png)
+- ![Screenshot](/public/images/DeletedPost.png)
+
 ## Support
 
 N/A

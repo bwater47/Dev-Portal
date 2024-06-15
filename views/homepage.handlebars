@@ -3,8 +3,11 @@
   <h1>Homepage</h1>
   {{#each postArray as |post|}}
     <div>
-      <h3><a href="/post/{{post.id}}">Title: {{post.title}}</a></h3>
-      <p>Posted on: {{format_date}}</p>
+      <a href="/post/{{post.id}}">
+        <h3>Title: {{post.title}}</h3>
+        <p>By: {{User.username}}</p>
+        <p>Posted on: {{format_date}}</p>
+      </a>
       <!-- Display comments for the post -->
         {{#each comments}}
           <p>{{comment}}</p>

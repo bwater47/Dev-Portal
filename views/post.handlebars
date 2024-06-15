@@ -1,21 +1,24 @@
 <!-- This is the post page. It displays contents of the post, the comments, and a form to add a new comment if you're logged in. -->
 <section>
     <input type="hidden" id="post-id" value="{{id}}">
-    <h2>{{title}}</h2>
-    <p>{{post_content}}</p>
+    <h2>Title: {{title}}</h2>
+    <p>Content: {{post_content}}</p>
     <p>By: {{User.username}}</p>
     <p>Date: {{format_date}}</p>
 </section>
 {{#if loggedIn}}
 <div>
         <form id="new-comment-form" action="/api/comments/api/posts/1" method="POST">
-         <input type="hidden" id="post-id" value="{{id}}">
+         <input type="hidden" id="post_id" value="{{id}}">
         <label for="comment_text">New Comment</label>
-    <textarea id="comment-content" name="comment_text" placeholder="Enter your comment here"></textarea>
-    </div>
+    <textarea id="comment_text" name="comment_text" placeholder="Enter your comment here"></textarea>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-    </div>
+</div>
+{{else}}
+    <p>You must be logged in to comment.</p>
+    <a href="/login">Login</a>
+    <a href="/signup">Sign Up</a>
 {{/if}}
     <div>
         {{#each Comments as |comment|}}
