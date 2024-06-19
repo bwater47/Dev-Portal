@@ -1,10 +1,10 @@
-// Importing important parts of sequelize library
+// Importing important parts of sequelize library.
 const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
-// User model (table) by extending off Sequelize's Model class
+// User model (table) by extending off Sequelize's Model class.
 class Users extends Model {
-  // Set up method to run on instance data (per user) to check password
+  // Set up method to run on instance data (per user) to check password.
   checkPassword(loginPw) {
     return bcrypt.compareSync(loginPw, this.password);
   }

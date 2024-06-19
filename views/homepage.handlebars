@@ -1,4 +1,4 @@
-<!-- Display all posts on the homepage with a clickable post to view a specific post -->
+<!-- Display all posts on the homepage with a clickable post to view a specific post. -->
 <section>
   <h1>Homepage</h1>
   {{#each postArray as |post|}}
@@ -8,7 +8,7 @@
         <p>By: {{User.username}}</p>
         <p>Posted on: {{format_date}}</p>
       </a>
-      <!-- Display comments for the post -->
+      <!-- Display comments for the post. -->
         {{#each comments}}
           <p>{{comment}}</p>
         {{/each}}

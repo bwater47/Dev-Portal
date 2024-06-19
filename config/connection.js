@@ -1,12 +1,13 @@
-// Imports the Sequelize constructor from the library
+// Imports the Sequelize constructor from the library.
 const Sequelize = require('sequelize');
-// Utilizes the dotenv package to set environment variables
+// Utilizes the dotenv package to set environment variables.
 require('dotenv').config();
 let sequelize;
 // If the app is deployed, it will use the deployed database. Otherwise, it will use the local database.
 if (process.env.DB_URL) {
   sequelize = new Sequelize(process.env.DB_URL);
 } else {
+  // Creates the connection to the database with the environment variables.
   sequelize = new Sequelize(
     process.env.DB_NAME,
     process.env.DB_USER,

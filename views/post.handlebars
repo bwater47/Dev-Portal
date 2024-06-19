@@ -6,6 +6,7 @@
     <p>By: {{User.username}}</p>
     <p>Date: {{format_date}}</p>
 </section>
+<!-- If the user is logged in, display the form to add a new comment. Otherwise, display a message to log in or sign up. -->
 {{#if loggedIn}}
 <div>
         <form id="new-comment-form" action="/api/comments/api/posts/1" method="POST">
@@ -20,12 +21,13 @@
     <a href="/login">Login</a>
     <a href="/signup">Sign Up</a>
 {{/if}}
+<!-- Display all comments for the post. -->
     <div>
         {{#each Comments as |comment|}}
         {{> comments}}
         {{/each}}
     </div>
-
+<!-- If the user is logged in, display the comment script. -->
 {{#if loggedIn}}
     <script src='/js/comment.js'></script>
 {{/if}}

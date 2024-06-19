@@ -1,11 +1,11 @@
-// Create a new model for the Post table
+// Create a new model for the Post table.
 const { Model, DataTypes } = require('sequelize');
-// Import the connection to the database
+// Import the connection to the database.
 const sequelize = require('../config/connection');
-// This is the Post model that extends the Sequelize Model
+// This is the Post model that extends the Sequelize Model.
 class Post extends Model {}
 
-// Define the columns in the Post table
+// Define the columns in the Post table.
 Post.init(
   {
     id: {

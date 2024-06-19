@@ -4,7 +4,7 @@
     <div class='row'>
       <div class='col-md-12'>
         <h1>Dashboard</h1>
-          <p>Welcome to your dashboard{{User.username}}!</p>
+          <p>Welcome to your dashboard {{userLogged.dataValues.username}}!</p>
         <h2>Your Posts</h2>
         {{#if loggedIn}}
           <a href='/api/posts/new' class='btn btn-primary'>New Post</a>

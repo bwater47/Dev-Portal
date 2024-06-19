@@ -1,9 +1,9 @@
-// This function is used to handle the submission of a new comment
+// This function is used to handle the submission of a new comment.
 const newCommentHandler = async (event) => {
   event.preventDefault();
   const post_id = document.querySelector('#post_id').value?.trim();
   const comment_text = document.querySelector('#comment_text').value?.trim();
-  // This if statment checks if the post_id and comment_text exist
+  // This if statment checks if the post_id and comment_text exist.
   if (post_id && comment_text) {
     const response = await fetch(`/api/comments/newComment`, {
       method: 'POST',
@@ -14,7 +14,7 @@ const newCommentHandler = async (event) => {
     });
 
     if (response.ok) {
-      // Clear the comment form after successful submission
+      // Clear the comment form after successful submission.
       document.location.replace('/dashboard');
     } else {
       alert('Failed to create comment');
@@ -22,7 +22,7 @@ const newCommentHandler = async (event) => {
   }
 };
 
-// Add an event listener to the new comment form to listen for a submit event and call the newCommentHandler function
+// Add an event listener to the new comment form to listen for a submit event and call the newCommentHandler function.
 document
   .querySelector('#new-comment-form')
   .addEventListener('submit', newCommentHandler);
