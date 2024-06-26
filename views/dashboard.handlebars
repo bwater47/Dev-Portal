@@ -1,16 +1,15 @@
 <!-- The dashboard view will display the user's posts and provide a link to create a new post if logged in. -->
-<section>
-  <div class='container'>
-    <div class='row'>
-      <div class='col-md-12'>
-        <h1>Dashboard</h1>
-          <p>Welcome to your dashboard {{userLogged.dataValues.username}}!</p>
-        <h2>Your Posts</h2>
-        {{#if loggedIn}}
-          <a href='/api/posts/new' class='btn btn-primary'>New Post</a>
-        {{/if}}
-        {{#each postArray}}
-        <section>
+<div class='container'>
+      <h1>Dashboard</h1>
+  <div class='row'>
+    <div class='col-md-12'>
+      <p>Welcome to your dashboard {{userLogged.dataValues.username}}!</p>
+      <h2>Your Posts</h2>
+      {{#if loggedIn}}
+        <a href='/api/posts/new' class='btn btn-primary'>New Post</a>
+      {{/if}}
+      {{#each postArray}}
+        <section class='post-section'>
           <a href='/api/posts/editPost/{{id}}' class='post-box'>
             <input type='hidden' id='post-id' value='{{id}}' />
             <h2>Title: {{title}}</h2>
@@ -19,10 +18,7 @@
             <p>Date: {{format_date}}</p>
           </a>
         </section>
-        {{/each}}
-      </div>
-      </div>
-      </div>
+      {{/each}}
     </div>
   </div>
-</section>
+</div>

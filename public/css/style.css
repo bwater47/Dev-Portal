@@ -1,13 +1,29 @@
 /* This is the CSS file for the application */
 body {
+  background-color: darkgray;
   margin: 0;
   font-family: Arial, sans-serif;
+}
+
+h1 {
+  font-size: 3em; /* Large font size */
+  color: #333; /* Dark color */
+  text-align: center; /* Center the text */
+  margin-top: 20px; /* Top margin */
+  margin-bottom: 20px; /* Bottom margin */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Subtle text shadow */
+  letter-spacing: 2px; /* Space out the letters */
+  background: linear-gradient(90deg, #007bff, #0056b3); /* Gradient background */
+  -webkit-background-clip: text; /* Clip the background to the text */
+  -webkit-text-fill-color: transparent; /* Make the text transparent */
+  padding: 10px 0; /* Padding for visual balance */
+  border-bottom: 3px solid #333; /* Bottom border */
 }
 
 header {
   background-color: #333;
   padding: 10px 0;
-  position: fixed;
+  position: relative;
   top: 0;
   width: 100%;
   z-index: 1000;
@@ -15,8 +31,8 @@ header {
 
 header ul {
   list-style: none;
-  margin: 0;
-  padding: 0;
+  margin: 4px 0;
+  padding: 4px 0;
   display: flex;
   justify-content: space-around;
 }
@@ -25,19 +41,17 @@ header li {
   margin: 0 15px;
 }
 
-header a {
+header ul a {
   color: #fff;
   text-decoration: none;
   font-size: 16px;
 }
 
-header a:hover {
-  text-decoration: underline;
-}
 /* Add padding to the main content to ensure that there is no overlap with the content and the header */
 main {
-  padding-top: 60px;
+  padding-top: 40px;
 }
+
 /* Add padding text-align margin-top background-color position bottom and width to the footer */
 footer {
   text-align: center;
@@ -47,4 +61,290 @@ footer {
   position: relative;
   bottom: 0;
   width: 100%;
+}
+
+/* Add styling to the navigation bar links */
+.hover-blue:hover {
+  color: #007bff;
+  text-decoration: none;
+}
+
+/* Container for the entire post */
+.post-container {
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Make the entire container clickable */
+.post-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+/* Add hover effect */
+.post-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Flex container for the post header */
+.post-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+/* Styling for the post title */
+.post-title {
+  font-size: 1.5em;
+  margin: 0;
+  flex-grow: 1;
+  color: #333;
+}
+
+/* Styling for the post author */
+.post-author {
+  font-size: 0.9em;
+  margin: 0;
+  color: #888;
+  margin-left: 10px;
+}
+
+/* Styling for the post date */
+.post-date {
+  font-size: 0.9em;
+  color: #888;
+  margin-bottom: 20px;
+  text-align: right;
+}
+
+/* Styling for the post comments */
+.post-comments {
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+
+.post-comments p {
+  margin: 5px 0;
+}
+
+.post-section {
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Styling for the post content */
+.post-content {
+  font-size: 40em;
+  margin: 10px 0;
+  color: #333;
+}
+
+/* Container for the comment form */
+.comment-form-container {
+  margin-top: 20px;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+/* Styling for the textarea */
+.comment-textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+/* Styling for the submit button */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+/* Styling for the button hover effect */
+.btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+/* Container for the comments section */
+section {
+  margin-top: 40px;
+  padding: 20px;
+  border-top: 3px solid #ccc;
+  background-color: #f7f7f7;
+}
+
+/* Styling for the comments heading */
+section h3 {
+  font-size: 2em;
+  color: #333;
+  text-align: left;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Container for each comment article */
+section article {
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Hover effect for the comment article */
+section article:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling for the comment text */
+section article p {
+  margin: 10px 0;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Styling for the user and date info */
+section article p:nth-child(2),
+section article p:nth-child(3) {
+  font-size: 0.9em;
+  color: #888;
+}
+
+/* Styling for the section containing the post */
+.post-section {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #f7f7f7;
+}
+
+/* Styling for the post-box */
+.post-box {
+  display: block;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Hover effect for the post-box */
+.post-box:hover {
+  text-decoration: none;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling for the title */
+.post-box h2 {
+  font-size: 1.8em;
+  margin: 0;
+  color: #333;
+}
+
+/* Styling for the content */
+.post-box p {
+  margin: 10px 0;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Styling for the author and date */
+.post-box p:nth-of-type(3),
+.post-box p:nth-of-type(4) {
+  font-size: 0.9em;
+  color: #888;
+}
+
+/* Login Form Styles */
+div {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  margin-top: 50px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input[type="submit"] {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+input[type="submit"]:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+a:hover {
+  text-decoration: underline;
 }

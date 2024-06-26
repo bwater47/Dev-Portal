@@ -1,18 +1,19 @@
 <!-- Display all posts on the homepage with a clickable post to view a specific post. -->
-<section>
-  <h1>Homepage</h1>
-  {{#each postArray as |post|}}
-    <div>
-      <a href="/post/{{post.id}}">
-        <h3>Title: {{post.title}}</h3>
-        <p>By: {{User.username}}</p>
-        <p>Posted on: {{format_date}}</p>
-      </a>
-      <!-- Display comments for the post. -->
-        {{#each comments}}
-          <p>{{comment}}</p>
-        {{/each}}
-      </div>
+<div class='container'>
+      <h1>Homepage</h1>
+  <div class='row'>
+    <div class='col-md-12'>
+      {{#each postArray as |post|}}
+      <section class="post-section">
+        <a href='/post/{{post.id}}' class='post-box'>
+          <div class='post-header'>
+            <h3 class='post-title'>Title: {{post.title}}</h3>
+            <p class='post-author'>By: {{User.username}}</p>
+          </div>
+          <div class='post-date'>Posted on: {{format_date}}</div>
+        </a>
+      </section>
+      {{/each}}
     </div>
-  {{/each}}
-</section>
+  </div>
+</div>

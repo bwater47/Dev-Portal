@@ -38,7 +38,7 @@ The Dev Portal is important for Web Developers. They spend their time reading an
 - ![Screenshot](/public/images/PostLoggedOut.png)
 - ![Screenshot](/public/images/Login.png)
 - ![Screenshot](/public/images/SignUp.png)
-- ![Screenshot](/public/images/EditedPost.png)
+- ![Screenshot](/public/images/EditPost.png)
 - ![Screenshot](/public/images/DeletedPost.png)
 
 ## Support

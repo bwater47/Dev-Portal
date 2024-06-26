@@ -1,5 +1,5 @@
 <!-- Main layout for the application. -->
-<!DOCTYPE html>
+
 <html lang='en'>
   <head>
     <meta charset='UTF-8' />
@@ -12,24 +12,41 @@
     <header>
       <ul>
         <!-- If the user is logged in, display the Dashboard and Logout links otherwise redirect to the login page. -->
-        <li><a href='/'>Home</a></li>
+        <li><a
+            href='/'
+            class='hover-blue'
+          >Home</a></li>
         {{#if loggedIn}}
-        <li><a href='/dashboard'>Dashboard</a></li>
+          <li><a
+              href='/dashboard'
+              class='hover-blue'
+            >Dashboard</a></li>
         {{else}}
-        <li><a href='/login'>Dashboard</a></li>
+          <li><a
+              href='/login'
+              class='hover-blue'
+            >Dashboard</a></li>
         {{/if}}
         {{#if loggedIn}}
-          <li><a href='/logout' id='logout'>Logout</a></li>
+          <li><a
+              href='/logout'
+              id='logout'
+              class='hover-blue'
+            >Logout</a></li>
         {{else}}
-          <li><a href='/login' id='login-form'>Login</a></li>
+          <li><a
+              href='/login'
+              id='login-form'
+              class='hover-blue'
+            >Login</a></li>
         {{/if}}
       </ul>
     </header>
-<!-- The body of the page will be rendered here. -->
+    <!-- The body of the page will be rendered here. -->
     <main>
       {{{body}}}
     </main>
-    <footer class="">
+    <footer>
       <p>&copy; 2024 Dev Portal</p>
     </footer>
   </body>

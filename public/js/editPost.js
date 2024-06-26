@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
     // This code is used to make a fetch request to the server to edit the post if the title and the content are not empty.
     if (title && content) {
-      const response = await fetch(`/api/posts/editpost/${id}`, {
+      const response = await fetch(`/api/posts/editPost/${id}`, {
         method: 'PUT',
         body: JSON.stringify({ title, post_content: content }),
         headers: { 'Content-Type': 'application/json' },
