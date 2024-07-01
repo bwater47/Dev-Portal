@@ -35,7 +35,6 @@ router.get('/editPost/:id', withAuth, async (req, res) => {
   try {
     // The post data is found by the primary key of the post.
     const postData = await Post.findByPk(req.params.id);
-    console.log(postData)
     if (!postData) {
       res.status(404).json({ message: 'No post found with this id!' });
       return;

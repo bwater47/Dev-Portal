@@ -15,7 +15,8 @@ const newCommentHandler = async (event) => {
 
     if (response.ok) {
       // Clear the comment form after successful submission.
-      document.location.replace('/dashboard');
+      // Redirect to the current post page after successful submission.
+      document.location.replace('/post/' + post_id);
     } else {
       alert('Failed to create comment');
     }

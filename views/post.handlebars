@@ -1,20 +1,20 @@
 <!-- This is the post page. It displays contents of the post, the comments, and a form to add a new comment if you're logged in. -->
 <div class='container'>
-  <div class='row'>
-    <div class='col-md-12'>
       <h1>Post</h1>
 <section class="post-section">
   <article class='post-box'>
   <input type="hidden" id="post-id" value="{{id}}">
+  <div class="post-header">
   <h2 class="post-title">Title: {{title}}</h2>
-  <p class="post-content">Content: {{post_content}}</p>
   <p class="post-author">By: {{User.username}}</p>
-  <p class="post-date">Date: {{format_date}}</p>
+  </div>
+  <div class="post-contents">Content: {{post_content}}</div>
+  <div class="post-date">Date: {{format_date}}</div>
   </article>
 </section>
 <!-- If the user is logged in, display the form to add a new comment. Otherwise, display a message to log in or sign up. -->
 {{#if loggedIn}}
-<div class="post-section">
+<div class="post-box">
   <h3 class="section-header">Add a Comment</h3>
   <form id="new-comment-form" action="/api/comments/api/posts/1" method="POST">
     <input type="hidden" id="post_id" value="{{id}}">
@@ -24,19 +24,15 @@
   </form>
 </div>
 {{else}}
-<div class="comment-form-container post-box post-section">
+<div class="comment-form-container post-box">
   <p class="login-message">Please <a href="/login">login</a> or <a href="/signup">sign up</a> to leave a comment.</p>
 </div>
 {{/if}}
 <!-- Display all comments for the post. -->
-    <div>
         {{#each Comments as |comment|}}
         {{> comments}}
         {{/each}}
-    </div>
   </div>
-</div>
-</div>
 <!-- If the user is logged in, display the comment script. -->
 {{#if loggedIn}}
     <script src='/js/comment.js'></script>

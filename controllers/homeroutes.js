@@ -12,7 +12,6 @@ router.get('/', async (req, res) => {
     });
     // Map over the posts and serialize them
     const postArray = allPosts.map((post) => post.get({ plain: true }));
-    console.log(postArray);
     // Render the homepage template and pass the serialized posts into the template
     res.render('homepage', { postArray, loggedIn: req.session.logged_in });
   } catch (err) {
@@ -118,7 +117,6 @@ router.get('/post/:id', async (req, res) => {
     });
     // If the post is not found, return a 404 status.
     const post = postData.get({ plain: true });
-    console.log(post);
     // Render the post template and pass the serialized post data into the template.
     res.render('post', {
       ...post,
