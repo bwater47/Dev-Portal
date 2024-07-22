@@ -10,36 +10,37 @@
   </head>
   <body>
     <header>
+      <h1>Blog Post</h1>
       <ul>
-        <!-- If the user is logged in, display the Dashboard and Logout links otherwise redirect to the login page. -->
+      <!-- If the user is logged in, display the Dashboard and Logout links otherwise redirect to the login page. -->
+      <li><a
+        href='/'
+        class='hover-blue'
+        >Home</a></li>
+      {{#if loggedIn}}
         <li><a
-            href='/'
-            class='hover-blue'
-          >Home</a></li>
-        {{#if loggedIn}}
-          <li><a
-              href='/dashboard'
-              class='hover-blue'
-            >Dashboard</a></li>
-        {{else}}
-          <li><a
-              href='/login'
-              class='hover-blue'
-            >Dashboard</a></li>
-        {{/if}}
-        {{#if loggedIn}}
-          <li><a
-              href='/logout'
-              id='logout'
-              class='hover-blue'
-            >Logout</a></li>
-        {{else}}
-          <li><a
-              href='/login'
-              id='login-form'
-              class='hover-blue'
-            >Login</a></li>
-        {{/if}}
+          href='/dashboard'
+          class='hover-blue'
+        >Dashboard</a></li>
+      {{else}}
+        <li><a
+          href='/login'
+          class='hover-blue'
+        >Dashboard</a></li>
+      {{/if}}
+      {{#if loggedIn}}
+        <li><a
+          href='/logout'
+          id='logout'
+          class='hover-blue'
+        >Logout</a></li>
+      {{else}}
+        <li><a
+          href='/login'
+          id='login-form'
+          class='hover-blue'
+        >Login</a></li>
+      {{/if}}
       </ul>
     </header>
     <!-- The body of the page will be rendered here. -->

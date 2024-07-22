@@ -19,6 +19,7 @@ h1 {
     #0056b3
   ); /* Gradient background */
   -webkit-background-clip: text; /* Clip the background to the text */
+  background-clip: text; /* Clip the background to the text (standard property) */
   -webkit-text-fill-color: transparent; /* Make the text transparent */
   padding: 10px 0; /* Padding for visual balance */
   border-bottom: 3px solid #333; /* Bottom border */
@@ -31,14 +32,23 @@ header {
   top: 0;
   width: 100%;
   z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  color: #fff;
+  font-size: 24px;
+  margin: 0 15px;
 }
 
 header ul {
   list-style: none;
-  margin: 4px 0;
-  padding: 4px 0;
+  margin: 0;
+  padding: 0;
   display: flex;
-  justify-content: space-around;
+  align-items: center;
 }
 
 header li {
@@ -99,7 +109,14 @@ footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: #007bff;
   margin-bottom: 10px;
+}
+
+.post-header h2 {
+  font-size: 2em;
+  margin: 0;
+  color: #ffffff;
 }
 
 /* Styling for the post title */
@@ -107,21 +124,22 @@ footer {
   font-size: 1.5em;
   margin: 0;
   flex-grow: 1;
-  color: #333;
+  color: #ffffff;
 }
 
 /* Styling for the post author */
-.post-author {
+.post-author{
   font-size: 0.9em;
   margin: 0;
-  color: #888;
+  color: #333;
   margin-left: 10px;
 }
 
 /* Styling for the post date */
 .post-date {
   font-size: 0.9em;
-  color: #888;
+  color: #333;
+  background-color: #007bff;
   margin-bottom: 20px;
   text-align: right;
 }
@@ -141,7 +159,7 @@ footer {
   border-radius: 8px;
   padding: 20px;
   margin: 20px 0;
-  background-color: dimgray;
+  background-color: #333;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, box-shadow 0.2s;
 }
@@ -150,7 +168,8 @@ footer {
 .post-contents {
   font-size: 1.8em;
   margin: 10px 0;
-  color: #333;
+  color: #ffffff;
+  background-color: #007bff;
   text-align: center; /* Add this line to align the content in the center */
   width: 50%;
 }
@@ -161,7 +180,7 @@ footer {
   padding: 20px;
   border: 2px solid #ccc;
   border-radius: 8px;
-  background-color: #f9f9f9;
+  background-color: #007bff;
 }
 
 /* Styling for the textarea */
@@ -202,7 +221,7 @@ section {
   margin-top: 40px;
   padding: 20px;
   border-top: 3px solid #ccc;
-  background-color: #f7f7f7;
+  background-color: #2b2a2a;
 }
 
 /* Styling for the comments heading */
@@ -234,7 +253,7 @@ section article:hover {
 /* Styling for the comment text */
 section article p {
   margin: 10px 0;
-  color: #555;
+  color: #333;
   line-height: 1.6;
 }
 
@@ -242,14 +261,7 @@ section article p {
 section article p:nth-child(2),
 section article p:nth-child(3) {
   font-size: 0.9em;
-  color: #888;
-}
-
-/* Styling for the section containing the post */
-.post-section {
-  margin-top: 40px;
-  padding: 20px;
-  background-color: #f7f7f7;
+  color: #333;
 }
 
 /* Styling for the post-box */
@@ -265,7 +277,7 @@ section article p:nth-child(3) {
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-decoration: none;
-  color: inherit;
+  color: #333;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
@@ -280,13 +292,13 @@ section article p:nth-child(3) {
 .post-box h2 {
   font-size: 1.8em;
   margin: 0;
-  color: #333;
+  color: #ffffff;
 }
 
 /* Styling for the content */
 .post-box p {
   margin: 10px 0;
-  color: #555;
+  color: #333;
   line-height: 1.6;
 }
 
